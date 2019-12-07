@@ -2,6 +2,7 @@ from django.shortcuts import render  # ф-я возвращает html шабл�
 from .models import Topic, Entry
 from django.http import HttpResponseRedirect  # перенаправляет
 # пользователя к странице topics после отправки введенной темы.
+from django.http import HttpResponseNotFound
 from django.urls import reverse  # Функция reverse() определяет URL
 # по заданной схеме URL (то есть Django сгенерирует URL при запросе страницы).
 from .forms import TopicForm, EntryForm
@@ -77,11 +78,23 @@ def edit_entry(request, entry_id):
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('learning_logs:topic', args=[topic.id]))
-    context = {'entry:': entry, 'topic': topic, 'form': form}
+    context = {'entry': entry, 'topic': topic, 'form': form}
     return render(request, 'learning_logs/edit_entry.html', context)
 
 
-# def del_topic(request,topic_id):
-#    topic=Topic.object.get(id=topic_id)
-#    topic.delete()
-#    return
+def del_topic(request, topic_id):
+    try:
+        topic = Topic.objects.get(id=topic_id)
+        topic.delete()
+        return HttpResponseRedirect(reverse('learning_logs:topics'))
+    except Topic.DoesNotExist:
+        return HttpResponseNotFound("Topic not exist")
+
+
+def del_entry(request, entry_id):
+    try:
+        entry = Entry.objects.get(id=entry_id)
+        entry.delete()
+        return HttpResponseRedirect(reverse('learning_logs:topics'))
+    except Topic.DoesNotExist:
+        return HttpResponseNotFound("Topic not exist")
