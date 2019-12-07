@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load staticfiles%}
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css  " type="text/css">
+</head>
+<body style="background:silver">
+<p>
+    <a href="{% url 'learning_logs:index' %}">Learning Log</a> -
+    <a href="{% url 'learning_logs:topics' %}">Topics</a>
+
+</p>
+{% block content %}{% endblock content %}
+<!--Блок с именем content резервирует место; информация, попадающая в блок content, будет определяться дочерним шаблоном.-->
+
+</body>
+</html>

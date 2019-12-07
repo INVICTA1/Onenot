@@ -1,0 +1,13 @@
+C:\Users\Maksim\PycharmProjects\Pizzeria
+C:\Users\Maksim\ll_env\Scripts\activate-переход в виртуальную среду
+django-admin.py startproject learning_log .  -  создание django проекта
+python manage.py migrate-созлание базы данных для проекта
+python manage.py runserver-запускаем сервер
+python manage.py startapp learning_logs-создание модели(инфраструктуры, необходимой для построения приложения.)
+python manage.py makemigrations learning_logs-изменить базу данных для хранения информации
+ python manage.py migrate
+**Каждый раз, когда вы захотите изменить данные, которыми управляет Learning Log, выполните эти три действия: внесите
+изменения в models.py, вызовите makemigrations для learning_logs и прикажите Django выполнить миграцию проекта (migrate).**
+
+python manage.py createsuperuser-создание admin
+python manage.py shell - Введенные данные можно проанализировать на программном уровне в интерактивном терминальном сеансе. Эта интерактивная среда, называемая оболочкой (shell) Django, прекрасно подходит для тестирования и диагностики проекта
